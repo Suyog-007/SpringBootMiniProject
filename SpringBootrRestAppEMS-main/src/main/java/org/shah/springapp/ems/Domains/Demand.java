@@ -27,8 +27,19 @@ public class Demand {
     @Column(name = "manager_id")
     private String Manager_Id;
 
+    public enum positionLevel_enum{
+        A00, A01, A02, A03,
+        AS1, AS2,
+        P01, P02, P03, P04,
+        PS1,PS2, PS3, PS4,
+        M01, M02,M03,
+        E01,E02,E03,E04,
+        MS1,MS2,
+        ES1,ES2
+    }
     @Column(name = "position_level")
-    private String level;
+    @Enumerated(EnumType.STRING)
+    private positionLevel_enum level;
 
     @Column(name = "city")
     private String city;
@@ -46,6 +57,13 @@ public class Demand {
 
     @Column(name = "start_date")
     private  String StartDate;
+
+    private enum status_enum{
+        OPEN, CLOSED , NOT_FULFILLED
+    }
+    @Column(name ="status")
+    @Enumerated(EnumType.STRING)
+    private status_enum status;
 
     // getters and setters
 
@@ -90,13 +108,21 @@ public class Demand {
         MangerName = mangerName;
     }
 
-    public String getLevel() {
+    public positionLevel_enum getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(positionLevel_enum level) {
         this.level = level;
     }
+
+    //    public String getLevel() {
+//        return level;
+//    }
+//
+//    public void setLevel(String level) {
+//        this.level = level;
+//    }
 
     public double getDuration() {
         return Duration;
@@ -124,5 +150,21 @@ public class Demand {
 
     public Map<String, Integer> getSkills() {
         return Skills;
+    }
+
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
+
+    public void setStatus(status_enum status) {
+        this.status = status;
+    }
+
+    public status_enum getStatus() {
+        return status;
     }
 }
