@@ -6,6 +6,8 @@ import org.shah.springapp.ems.Repository.DemandRepository;
 import org.shah.springapp.ems.Repository.MemberRepository;
 import org.shah.springapp.ems.Services.MemberFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,15 +68,16 @@ public class RequestorRestController {
             @RequestParam(required = false) String employeeId,
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String lastName,
-            @RequestParam(required = false) Date dateOfJoining,
+            @RequestParam(required = false)  @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateOfJoining,
             @RequestParam(required = false) String location,
             @RequestParam(required = false) Integer experience,
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String positionLevel,
             @RequestParam(required = false) String skillKey,
-            @RequestParam(required = false) Integer skillValue) {
+            @RequestParam(required = false) Integer skillValue,
+            @RequestParam(required = false, defaultValue = "ASC") Sort.Direction sortOrder) {
 
         return memberFilterService.filterMembers(employeeId, firstName, lastName, dateOfJoining, location,
-                experience, status, positionLevel, skillKey, skillValue);
+                experience, status, positionLevel, skillKey, skillValue,sortOrder);
     }
 }
